@@ -1,0 +1,258 @@
+/* Default */
+a {
+  text-decoration: none;
+}
+/* Start Login Page */
+.login-form {
+  width: 300px;
+  margin: 100px auto;
+}
+.login-form input:not(:last-child) {
+  margin-bottom: 10px;
+}
+.login-form input {
+  outline: none;
+}
+table td {
+  text-align: center;
+}
+/* bootstrap */
+.dropdown {
+  background-color: #b1b1b1;
+}
+.dropdown a {
+  color: #424242 !important;
+}
+.dropdown a:hover {
+  background-color: #b1b1b1;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: none;
+}
+/* Index Page */
+.body-form {
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+}
+/* Dashboard Page */
+.stats {
+  background-color: #eee;
+  width: 23%;
+  border: 1px solid #ccc;
+}
+.stats-content {
+  background-color: #efefefee;
+  border-radius: 10px;
+}
+.stats-content a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.reg-user {
+  border: 1px solid #ccc;
+  background-color: #fff !important;
+}
+.span-text {
+  background-color: #efefefee;
+  padding: 10px 15px;
+}
+
+.st-total {
+  background-color: #01c5c4;
+}
+.st-pending {
+  background-color: #90af54;
+}
+.st-items {
+  background-color: #d0bf5e;
+}
+.st-comments {
+  background-color: #f39233;
+}
+
+.latest-users ul li,
+.latest-items ul li {
+  min-height: 35px;
+}
+.latest-div {
+  position: absolute;
+  right: 0px;
+}
+
+.latest-users ul li a,
+.latest-items ul li a {
+  width: 80px;
+  height: 25px;
+  line-height: 1.1;
+}
+
+/* Members Page */
+.form-card {
+  margin: 50px auto !important;
+  min-height: 480px;
+  padding: 15px;
+  background-color: #e8e8e8 !important;
+}
+.form-card .display-4 {
+  font-size: 2rem !important;
+}
+.form-card > input {
+  margin-bottom: 12px;
+  height: 42px;
+  outline: none;
+}
+
+/*Categories*/
+.form-card textarea {
+  resize: none;
+  margin-bottom: 12px;
+}
+.form-check {
+  margin-bottom: 2px;
+}
+.options > div {
+  margin-bottom: 10px;
+}
+/* Categories ==> Manage*/
+.cat-add {
+  margin-bottom: 20px;
+}
+.cat-add .cat-add-content {
+  display: flex;
+  align-items: center;
+}
+.cat-add .cat-add-content i {
+  margin-left: 4px;
+}
+.cat-add a {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cat-header {
+  margin: 30px 0px;
+  text-align: center;
+}
+
+.options-buttons a {
+  width: 80px;
+  height: 25px;
+  line-height: 1.1;
+}
+
+.sorting {
+  margin-bottom: 10px;
+}
+.sorting * {
+  color: #888;
+  font-weight: bold;
+}
+.sorting a {
+  text-decoration: none;
+}
+.sorting a.active {
+  color: #d85757 !important;
+}
+
+/* Categoires Eddition */
+.cat-rows .row {
+  margin-top: 20px;
+}
+.cat-rows .row > div {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+.cat-rows .row > div > div:first-child {
+  height: 170px !important;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 0px !important;
+  background-color: #f7f7f7;
+  z-index: 1;
+  overflow: hidden;
+  padding-right: 0px;
+}
+.options-buttons {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+.options-buttons > a {
+  margin-right: 5px;
+}
+
+.cat-rows .row > div > div:first-child:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  top: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+}
+.cat-rows .row > div:nth-child(odd) > div:first-child:before {
+  background-color: rgba(39, 173, 165, 0.6);
+}
+
+.cat-rows .row > div:nth-child(even) > div:first-child:before {
+  background-color: rgba(255, 87, 127, 0.6);
+}
+.cat-rows .row > div > div:first-child span {
+  position: absolute;
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 7px;
+  margin-left: 10px;
+}
+.cat-rows .row .content {
+  padding-top: 50px;
+  padding-left: 15px;
+  padding-bottom: 12px;
+  padding-right: 15px;
+}
+
+.cat-rows .row .content h5 {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #333;
+}
+.cat-rows .row .content p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  color: #777;
+}
+.cat-rows .row .op {
+  position: absolute;
+  z-index: 1;
+  margin-left: 5px;
+  top: 45px;
+  font-size: 8px;
+  right: 32px;
+}
+.cat-rows .row .op > span {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  cursor: default;
+}
+
+/* Start Items */
+.items .selectboxit-container {
+  margin-bottom: 12px;
+}
+/* Start Comments */
+.comments {
+  margin-top: 50px;
+}
+.comments form textarea {
+  resize: none;
+  margin-bottom: 10px;
+}
+.comments h3 {
+  font-size: 2em !important;
+}
