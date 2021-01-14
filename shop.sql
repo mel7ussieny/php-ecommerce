@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2021 at 01:03 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.1.12
+-- Generation Time: Jan 14, 2021 at 06:53 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,9 +32,9 @@ CREATE TABLE `categories` (
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Description` text CHARACTER SET utf8 NOT NULL,
   `Ordering` int(11) NOT NULL,
-  `Visibility` tinyint(4) NOT NULL DEFAULT '0',
-  `Allow_Comment` tinyint(4) NOT NULL DEFAULT '0',
-  `Allow_Ads` tinyint(4) NOT NULL DEFAULT '0'
+  `Visibility` tinyint(4) NOT NULL DEFAULT 0,
+  `Allow_Comment` tinyint(4) NOT NULL DEFAULT 0,
+  `Allow_Ads` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,9 +42,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`ID`, `Name`, `Description`, `Ordering`, `Visibility`, `Allow_Comment`, `Allow_Ads`) VALUES
-(8, 'Phones', 'This section responsible for buy and sell phones ', 2, 1, 1, 0),
-(10, 'Cars', 'This is responsible for buy and sell cards ', 4, 0, 1, 1),
-(14, 'Computer', 'This section for sell and buy computers online', 8, 1, 0, 0);
+(1, 'Hand made', 'Department responsible for sell and buy computers', 1, 1, 1, 1),
+(2, 'Books', 'Read and buy books online', 3, 1, 1, 1),
+(3, 'Electornics', 'The Department sell and by furniture with good quality', 2, 1, 1, 1),
+(4, 'Fashion', 'Sell and buy new clothes with new models', 4, 1, 1, 1),
+(5, 'Gift', 'You will be able to send gifts to your friends', 5, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -57,19 +58,10 @@ CREATE TABLE `comments` (
   `Com_ID` int(11) NOT NULL,
   `Comment` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Com_Date` date NOT NULL,
-  `Com_Status` tinyint(4) NOT NULL DEFAULT '0',
+  `Com_Status` tinyint(4) NOT NULL DEFAULT 0,
   `Com_User` int(11) NOT NULL,
   `Com_Item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`Com_ID`, `Comment`, `Com_Date`, `Com_Status`, `Com_User`, `Com_Item`) VALUES
-(1, 'Thank dude for this product', '2021-01-11', 0, 32, 10),
-(3, 'I hate iphones phones', '2021-01-08', 0, 35, 9),
-(4, 'The car is too expansive dude', '2021-01-11', 1, 35, 11);
 
 -- --------------------------------------------------------
 
@@ -88,7 +80,7 @@ CREATE TABLE `items` (
   `Item_Rating` tinyint(4) NOT NULL,
   `User_ID` int(11) NOT NULL,
   `Cat_ID` int(11) NOT NULL,
-  `Approve` tinyint(4) NOT NULL DEFAULT '0'
+  `Approve` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -96,10 +88,25 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`Item_ID`, `Item_Name`, `Item_Date`, `Item_Price`, `Item_Country`, `Item_Description`, `Item_Status`, `Item_Rating`, `User_ID`, `Cat_ID`, `Approve`) VALUES
-(8, 'Lancer', '2021-01-10', 120, 'Cairo', 'Lance Model 2008', 3, 3, 35, 10, 1),
-(9, 'Iphone 11', '2021-01-10', 10, 'Tanta', 'Iphone 11,\r\n128G\r\n4GB Ram', 4, 3, 35, 8, 1),
-(10, 'Laptop G3', '2021-01-10', 16, 'Alexanderia', 'Laptop G3, 16GB , Hard 1TB', 3, 5, 32, 14, 1),
-(11, 'C180', '2021-01-10', 127, 'Alexanderia', 'New car model 2021 , used 1 week', 4, 3, 24, 10, 1);
+(12, 'Oppo Enco W51', '2021-01-13', 127, 'Egypt', 'Airpods From Oppo ', 4, 5, 39, 3, 1),
+(13, 'Mouse', '2021-01-13', 127, 'Egypt', 'A 4Tech Mouse', 4, 4, 38, 3, 1),
+(14, 'Dell G3', '2021-01-13', 127, 'Egypt', 'Laptop G3 Dell 16 GB', 4, 5, 36, 3, 1),
+(15, 'Keyboard', '2021-01-13', 127, 'Egypt', 'Keyboard And Mouse From Hp', 3, 4, 38, 3, 1),
+(16, 'Eloquent JS', '2021-01-13', 70, 'Egypt', 'Javascript Book Author Marijn Haverbeke', 2, 5, 36, 2, 1),
+(17, 'Larvel Up', '2021-01-13', 90, 'Egypt', 'Strong book to learn larvel framwork', 3, 4, 39, 2, 1),
+(18, 'Amazon Gift 50$', '2021-01-13', 127, 'Egypt', 'Gift card from amazon with balance 50$', 4, 5, 39, 5, 1),
+(19, 'Walmart 20$', '2021-01-13', 127, 'Egypt', 'Gift card from walmart with 20$ balance', 4, 4, 40, 5, 1),
+(20, 'Google play 30$', '2021-01-13', 127, 'Egypt', 'Gift card from google play with 30$ balance', 4, 5, 39, 5, 1),
+(21, 'PRETTYGARDEN', '2021-01-13', 127, 'Egypt', 'Women’s Solid Color Two Piece Outfit Long', 4, 4, 39, 4, 1),
+(22, 'Escalier', '2021-01-13', 127, 'Egypt', 'Women\'s Down Jacket Winter Long', 4, 4, 39, 4, 1),
+(23, 'Leggings', '2021-01-13', 127, 'Egypt', 'Depot Women\'s Printed Solid Activewear Jogger', 4, 4, 38, 4, 1),
+(24, 'Women\'s 2 Piece', '2021-01-13', 127, 'Egypt', 'Sportswear Suit and Sweatpants Long Sleeve', 4, 4, 39, 4, 1),
+(25, 'Delicate Initial', '2021-01-13', 127, 'Egypt', 'Disc Necklace Rose Gold Initial Necklace Best Friend ', 4, 4, 36, 1, 1),
+(26, 'Sweet Water', '2021-01-13', 127, 'Egypt', 'Best Mom Ever, Sea Salt, Jasmine, Cream', 4, 3, 38, 1, 1),
+(27, 'Plant holder', '2021-01-13', 127, 'Egypt', 'Neko Atsume special edition', 4, 3, 39, 1, 1),
+(28, 'Popular Sea', '2021-01-13', 127, 'Egypt', 'Foam Green Sea Glass Earrings with Charming', 3, 4, 38, 1, 1),
+(29, 'Clean code Alige', '2021-01-13', 80, 'Egypt', 'Author Robert Martin', 3, 4, 38, 2, 1),
+(30, 'Javascript Visual', '2021-01-13', 100, 'Egypt', 'Learn ease javascript', 4, 4, 38, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -113,9 +120,9 @@ CREATE TABLE `users` (
   `Password` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `FullName` varchar(255) NOT NULL,
-  `Permission` tinyint(1) NOT NULL DEFAULT '0',
-  `Status` tinyint(1) NOT NULL DEFAULT '0',
-  `RegStatus` tinyint(1) NOT NULL DEFAULT '0',
+  `Permission` tinyint(1) NOT NULL DEFAULT 0,
+  `Status` tinyint(1) NOT NULL DEFAULT 0,
+  `RegStatus` tinyint(1) NOT NULL DEFAULT 0,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -124,9 +131,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Permission`, `Status`, `RegStatus`, `date`) VALUES
-(24, 'Admin', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'admin@gmail.com', 'Mahmoud Hussieny', 1, 0, 1, '0000-00-00'),
-(32, 'User5415', '52e152d69ad5cc4347498b5feed5db9f88aaa32c', 'admin@gmail.com', 'Ibrahim Ahmed', 0, 0, 1, '2020-12-10'),
-(35, 'User45858', '7e26df4315c040ca7935e519f6a4ae276b90d4f3', 'admin1@gmail.com', 'Galal Ahmed', 0, 0, 1, '2020-12-10');
+(36, 'Admin', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'admin@gmail.com', 'Mhamoud Hussieny', 0, 0, 1, '2021-01-13'),
+(37, 'Reversed', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'Reversed@gmail.com', 'Hassan Ali', 0, 0, 1, '2021-01-13'),
+(38, 'User0', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'user0@gmail.com', 'Osama Ahmed', 0, 0, 1, '2021-01-13'),
+(39, 'User1', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'User1@gmail.com', 'Fawzy Osama', 0, 0, 1, '2021-01-13'),
+(40, 'User2', '0f4dacc1203388b25e0fb2f3825b5772b9e9b811', 'User2@gmail.com', 'Khaled Mohsen ', 0, 0, 1, '2021-01-13');
 
 --
 -- Indexes for dumped tables
@@ -171,7 +180,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -183,13 +192,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `Item_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Item_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `UserID` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables
