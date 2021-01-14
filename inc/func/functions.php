@@ -1,6 +1,35 @@
 <?php
   /*
     ***********
+    ****** Get the items from categories
+    ***********
+  */
+
+  function getCat(){
+    global $connect;
+    $stmt = $connect->prepare("SELECT * FROM categories ORDER BY Ordering ASC");
+    $stmt->execute();
+    $cats = $stmt->fetchAll();
+    return $cats;
+  }
+
+    /*
+    ***********
+    ****** Get the categories
+    ***********
+  */
+
+  function getItems($value){
+    global $connect;
+    $stmt = $connect->prepare("SELECT * FROM items WHERE Cat_ID = ? ORDER BY Item_ID DESC");
+    $stmt->execute(array($value));
+    $items = $stmt->fetchAll();
+    return $items;
+  }
+
+
+  /*
+    ***********
     ****** FUNCTION THE TITLE OF PAGE
     ***********
   */
