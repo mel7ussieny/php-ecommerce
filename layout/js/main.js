@@ -9,4 +9,18 @@ $(document).ready(function(){
     $("select").selectBoxIt({
       autoWidth:false,
     });
+
+    $(".login h3 span").click(function(){
+        if($(this).attr("class") == "signin"){
+          $(this).css("color","#0069D9");
+          $(this).siblings().css("color","#2b2b2b");
+        }else if($(this).attr("class") == "signup"){
+          $(this).css("color","#218838");
+          $(this).siblings().css("color","#2b2b2b");
+          
+        }
+        $(".login form").hide();
+        $(".form-login."+$(this).attr("class")).fadeIn(100);
+    })
+
 })

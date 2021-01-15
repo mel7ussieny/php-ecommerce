@@ -8,56 +8,59 @@ a {
   height: 100%;
   background-color: #ccc;
 }
-.item{
-  border:1px solid #CCC;
-  margin-bottom:30px;
-  background-color:#fcfcfc;
+.item {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  background-color: #fcfcfc;
   position: relative;
 }
-.item .item-img img{
-  width:100%;
+.item .item-img img {
+  width: 100%;
 }
-.item .item-details{
-  padding:10px;
+.item .item-details {
+  padding: 10px;
 }
-.item .item-details h4{
-  font-family: 'Noto Sans JP';
-
+.item .item-details h4 {
+  font-family: "Noto Sans JP";
 }
-.item .item-details p{
-  font-family: 'Open Sans';
-
+.item .item-details p {
+  font-family: "Open Sans";
 }
-.item-price{
-  position:absolute;
-  font-family: 'Noto Sans JP';
+.item-price {
+  position: absolute;
+  font-family: "Noto Sans JP";
   display: block;
-  top:10px;
-  left:0px;
-  background-color:#6e6e6e;
-  color: #FFF;
-  padding:1px 40px 1px 20px;
-
+  top: 10px;
+  left: 0px;
+  background-color: #6e6e6e;
+  color: #fff;
+  padding: 1px 40px 1px 20px;
 }
-.upper-bar{
-  padding-right:.5rem !important;
-  padding-top:10px;
-  padding-bottom:10px;
+.upper-bar {
+  padding-right: 0.5rem !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.upper-bar a{
+.upper-bar a {
   text-decoration: none;
 }
 /* Login Page */
-.login h3{
+.login h3 {
   margin: 30px 0px;
+  cursor: default;
 }
 .form-login,
-.form-signup{
-  max-width:400px;
-  margin:0px auto;
-
+.form-signup {
+  max-width: 400px;
+  margin: 0px auto;
 }
-.form-login > input{
-  margin-bottom:10px;
+.form-login > input {
+  margin-bottom: 10px;
   box-shadow: none !important;
+}
+.form-login.signup > input:focus {
+  border-color: rgba(40, 167, 69, 0.5) !important;
+}
+.login form.signup {
+  display: none;
 }

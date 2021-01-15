@@ -13,9 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
     <body>
-      <div class="container" >
+      <div class="container">
         <div class="d-flex justify-content-end upper-bar">
-          <a href="login.php">Login/Sign Up</a>
+          <?php
+            if(!isset($_SESSION['client'])){
+              echo '<a href="login.php" style="margin-left:auto">Login/Sign Up</a>';
+            }else{
+              echo '<span style="margin-right:auto">Welcome '.$_SESSION['client'].'</span>';
+            }
+          
+          ?>
+          
         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">

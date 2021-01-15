@@ -26,7 +26,7 @@
         $stmt->execute(array($username,$password));
         $count = $stmt->rowCount();
         $row = $stmt->fetch();
-
+        
         print_r($row);
         if($count > 0){
           $_SESSION['user'] = $username;
