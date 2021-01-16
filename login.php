@@ -2,7 +2,7 @@
     session_start();
     $title = "Login";
     include "init.php";
-    if(isset($_SESSION['client'])){ header("Location:index.php"); exit; }
+    if(isset($_SESSION['Client'])){ header("Location:index.php"); exit; }
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $user = $_POST['user'];
         $pass = $_POST['pass'];
@@ -10,9 +10,11 @@
 
         $stmt = $connect->prepare("SELECT * FROM users WHERE Username = ? AND Password = ? LIMIT 1");
         $stmt->execute(array($user,$hahsedpass));
+        $row = $stmt->fetch();
         $count = $stmt->rowCount();
         if($count > 0){
-            $_SESSION['client'] = $user;
+            $_SESSION['User_ID'] = $row['UserID'];
+             $_SESSION['Client'] = $user;
             header("Location: index.php");
             exit();
         }

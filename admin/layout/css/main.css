@@ -45,6 +45,13 @@ table td {
 .stats-content {
   background-color: #efefefee;
   border-radius: 10px;
+  display: flex;
+  justify-content:space-between;
+}
+.dash-icons{
+  font-size: 55px;
+  color: #FFF;
+  line-height: 1.5;
 }
 .stats-content a {
   color: #fff;

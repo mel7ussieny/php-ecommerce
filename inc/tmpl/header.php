@@ -16,14 +16,22 @@
       <div class="container">
         <div class="d-flex justify-content-end upper-bar">
           <?php
-            if(!isset($_SESSION['client'])){
+          // View The User Name
+            if(!isset($_SESSION['Client'])){
               echo '<a href="login.php" style="margin-left:auto">Login/Sign Up</a>';
             }else{
-              echo '<span style="margin-right:auto">Welcome '.$_SESSION['client'].'</span>';
+              echo "<div class='d-inline mr-auto'>";
+              echo '<span>Welcome '.$_SESSION['Client'].' </span>';
+              echo '<a href="profile.php">• View Profile </a>';
+              echo '<a href="logout.php">• Logout</a>';
+
+              echo "</div>"; 
             }
-          
+
+          // View Users Controls
+            
           ?>
-          
+
         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">

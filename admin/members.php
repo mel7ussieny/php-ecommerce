@@ -208,7 +208,7 @@ foreach($row as $key => $value){
           if(empty($ErrorsCatch)){
             $stmt = $connect->prepare("INSERT INTO 
             users(Username, Password, Email, FullName,RegStatus,date) 
-            VALUES(:zuser, :zpass, :zmail, :zfull,0,:zdate)
+            VALUES(:zuser, :zpass, :zmail, :zfull,1,:zdate)
             ");
             $stmt->execute(array(
             "zuser" => $user,

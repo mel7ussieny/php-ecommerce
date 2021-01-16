@@ -8,28 +8,48 @@ $navbar = 1;
   ?>
   <div class="container">
     <div class="row mt-5">
-      <div class="col-sm-12 col-md-3 mb-sm-3 mb-md-0">
+      <div class="col-12 col-lg-3 mb-3 mb-lg-0">
       <div class="stats-content p-4 text-center st-total">
-          <span class="d-block font-weight-bold text-light">Total Members</span>
-          <span class="display-4 font-weight-bold text-light"><a href="members.php"><?php getCount("UserID","users")?></a></span>
+          <div class="left-icon">
+            <i class="fas fa-users dash-icons"></i>
+          </div>
+          <div class="right-text">
+            <span class="d-block font-weight-bold text-light">Total Members</span>
+            <span class="display-4 font-weight-bold text-light"><a href="members.php"><?php getCount("UserID","users")?></a></span>
+          </div>
         </div>
       </div>
-      <div class="col-sm-12  col-md-3 mb-sm-3 mb-md-0">
+      <div class="col-12 col-lg-3 mb-3 mb-lg-0">
       <div class="stats-content p-4 text-center st-pending">
-          <span class="d-block font-weight-bold text-light">Pending Members</span>
-          <span class="display-4 font-weight-bold text-light"><a href="members.php?action=Manage&page=pending"><?php getCount("UserID","users","RegStatus = 0")?></a></span>
+        <div class="left-icon">
+        <i class="fas fa-star-half-alt dash-icons"></i>
+        </div>
+          <div class="right-text">
+            <span class="d-block font-weight-bold text-light">Pending Members</span>
+            <span class="display-4 font-weight-bold text-light"><a href="members.php?action=Manage&page=pending"><?php getCount("UserID","users","RegStatus = 0")?></a></span>
+          </div>
         </div>
       </div>
-      <div class="col-sm-12  col-md-3 mb-sm-3 mb-md-0">
+      <div class="col-12 col-lg-3 mb-3 mb-lg-0">
       <div class="stats-content p-4 text-center st-items">
-          <span class="d-block font-weight-bold text-light">Total Items</span>
-          <span class="display-4 font-weight-bold text-light"><a href="items.php"><?php getCount("Item_ID","items")?></a></span>
+          <div class="left-icon">
+            <i class="fas fa-tag dash-icons"></i>
+          </div>
+          <div class="right-text">
+            <span class="d-block font-weight-bold text-light">Total Items</span>
+            <span class="display-4 font-weight-bold text-light"><a href="items.php"><?php getCount("Item_ID","items")?></a></span>
+           </div>
         </div>
       </div>
-      <div class="col-sm-12  col-md-3 mb-sm-3 mb-md-0">
+      <div class="col-12 col-lg-3 mb-3 mb-lg-0">
       <div class="stats-content p-4 text-center st-comments">
-          <span class="d-block font-weight-bold text-light">Total Comments</span>
-          <span class="display-4 font-weight-bold text-light"><a href="comments.php"><?php getCount("Com_ID","comments")?></a></span>
+          <div class="left-icon">
+            <i class="fas fa-comments dash-icons"></i>
+          </div>
+          <div class="right-text">
+            <span class="d-block font-weight-bold text-light">Total Comments</span>
+            <span class="display-4 font-weight-bold text-light"><a href="comments.php"><?php getCount("Com_ID","comments")?></a></span>
+          </div>
         </div>
       </div>
       <div class="col-md-6 mt-4">

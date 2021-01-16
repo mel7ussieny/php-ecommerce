@@ -1,24 +1,30 @@
 <?php
   /*
     ***********
-    ****** Get the items from categories
+    ****** Client Functions
     ***********
   */
 
-  function getCat(){
+  // Check The Client Exists
+
+  function userStatus($value){
     global $connect;
-    $stmt = $connect->prepare("SELECT * FROM categories ORDER BY Ordering ASC");
-    $stmt->execute();
-    $cats = $stmt->fetchAll();
-    return $cats;
+    $stmt = $connect->prepare("SELECT * FROM users WHERE UserID = ? AND RegStatus = ? LIMIT 1");
+    $stmt->execute(array($value,1));
+    $count = $stmt->rowCount();
+    return $count;
+   
   }
 
-    /*
+
+
+  /*
     ***********
-    ****** Get the categories
+    ****** categories Functions
     ***********
   */
 
+  // Get Items From Categories
   function getItems($value){
     global $connect;
     $stmt = $connect->prepare("SELECT * FROM items WHERE Cat_ID = ? ORDER BY Item_ID DESC");
@@ -27,6 +33,24 @@
     return $items;
   }
 
+
+  // Get Items From Categories
+  
+  function getCat(){
+    global $connect;
+    $stmt = $connect->prepare("SELECT * FROM categories ORDER BY Ordering ASC");
+    $stmt->execute();
+    $cats = $stmt->fetchAll();
+    return $cats;
+
+    // Check The Categorie Exists
+
+  }
+
+
+
+
+// Old Functions May Used
 
   /*
     ***********

@@ -54,6 +54,9 @@ a {
   max-width: 400px;
   margin: 0px auto;
 }
+.login h3 span.signin{
+  color: #0069D9;
+}
 .form-login > input {
   margin-bottom: 10px;
   box-shadow: none !important;
@@ -63,4 +66,78 @@ a {
 }
 .login form.signup {
   display: none;
+}
+
+
+/* Profile Page */
+/* Left Column */
+.infos{
+  margin-top:30px;
+}
+.user-left span{
+  display: block;
+}
+.user-left a{
+  text-decoration: none;
+}
+.user-left{
+  text-align: center;
+}
+.user-img-upper{
+  font-family: "Open Sans";
+}
+.infos .user-img{
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin:20px auto;
+}
+/* Right Column */
+.user-infos{
+  margin-top:60px;
+}
+.user-infos > span.title-column{ 
+  font-family: "Open Sans";
+  font-size:20px;
+}
+.user-personal{
+  margin-bottom:30px;
+}
+.user-personal > span,
+.user-contact > span{
+  font-family: "Noto Sans JP";
+  color: #5e5e5e;
+  font-size:15px
+}
+.input-field{
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  margin-top:10px;
+}
+.input-field input{
+  padding-right: 70px;
+  height:42px;
+}
+.input-field input:focus{
+  box-shadow: none;
+}
+.input-field label{
+  position: absolute;
+  font-size: 13px;
+  right: 10px;
+  color: #6e6e6e;
+  user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+}
+.static-data{
+  display:block;
+  font-family: "Noto Sans JP";
+  font-size:12px;
+  color: #777;
+  margin-top: 5px;;
 }
