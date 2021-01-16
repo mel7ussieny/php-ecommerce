@@ -54,7 +54,23 @@
 
                 <div class="col-12">
                     <div class="user-ads">
-                        
+                        <h3>Advertisements</h3>
+                        <div class="row">
+                        <?php
+                            foreach(getItems("User_ID",$row['UserID']) as $item){
+                                echo "<div class='col-12 col-md-6 col-lg-3'>";
+                                echo "<div class='item'>";
+                                    echo "<div class='item-img d-flex justify-content-center'><img src='img.jpg' class='item-img img-responsive m-auto'></div>";
+                                    echo "<div class='item-details'>";
+                                        echo "<span class='item-price'>".$item['Item_Price']."</span>";
+                                        echo "<h4><a href='items.php?item_id=".$item['Item_ID']."'>".$item['Item_Name']."</a></h4>";
+                                        echo "<p>".$item['Item_Description']."</p>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                echo "</div>";
+                            }
+                        ?>
+                        </div>
                     </div>
                 </div>
 

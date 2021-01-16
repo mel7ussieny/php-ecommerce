@@ -25,9 +25,9 @@
   */
 
   // Get Items From Categories
-  function getItems($value){
+  function getItems($where,$value){
     global $connect;
-    $stmt = $connect->prepare("SELECT * FROM items WHERE Cat_ID = ? ORDER BY Item_ID DESC");
+    $stmt = $connect->prepare("SELECT * FROM items WHERE $where = ? ORDER BY Item_ID DESC");
     $stmt->execute(array($value));
     $items = $stmt->fetchAll();
     return $items;

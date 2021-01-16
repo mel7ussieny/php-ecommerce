@@ -23,7 +23,9 @@
               echo "<div class='d-inline mr-auto'>";
               echo '<span>Welcome '.$_SESSION['Client'].' </span>';
               echo '<a href="profile.php">• View Profile </a>';
+              echo '<a href="newads.php">• New Ads </a>';
               echo '<a href="logout.php">• Logout</a>';
+            
 
               echo "</div>"; 
             }

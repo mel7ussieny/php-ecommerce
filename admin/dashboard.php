@@ -64,8 +64,8 @@ $navbar = 1;
             $data = getLatest("FullName,UserID,RegStatus","users","UserId");
 
             foreach($data as $row){
-              echo "<li class='d-flex align-items-center' style='position:relative'>" .  $row["FullName"] .
-              "<div class='latest-div'><a href='members.php?action=Edit&UserID=".$row['UserID']."' class='btn btn-primary btn-sm'>
+              $fullName = empty($row["FullName"]) == TRUE ? "Root" : $row["FullName"];
+              echo "<li class='d-flex align-items-center' style='position:relative'>".$fullName."<div class='latest-div'><a href='members.php?action=Edit&UserID=".$row['UserID']."' class='btn btn-primary btn-sm'>
               <i class='fas fa-edit'></i>
               Edit
               </a>";

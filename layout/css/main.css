@@ -1,6 +1,6 @@
 /* Default */
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 /* Index Page */
 .body-form {
@@ -140,4 +140,68 @@ a {
   font-size:12px;
   color: #777;
   margin-top: 5px;;
+}
+/* Advert */
+.user-ads{
+  margin-top:100px;
+}
+.user-ads h3{
+  margin-bottom:30px;
+  text-align: center;
+  font-family: "Noto Sans JP";
+
+}
+/* New ads page */
+.adver form input,.selectboxit,textarea{
+  margin-bottom:10px !important;
+  height: 45px !important;
+}
+.adver form input:focus,
+.adver form textarea:focus{
+  box-shadow: none;
+}
+.adver form textarea{
+  height:100px !important;
+}
+.adver form textarea{
+  resize: none;
+}
+.live-preview{
+  margin-top:150px;
+}
+.item-add{
+  margin-top:50px;
+}
+/* Item Display Page */
+.item-display{
+  margin-top: 40px;
+}
+.item_name{
+  font-family: "Open Sans";
+  margin-bottom:10px;
+}
+.item-list{
+  list-style:none;
+  padding: 0px;
+}
+.item-list li{
+  padding: 8px 10px;
+    display: flex;
+    align-items: center;
+}
+ul.item-list li span{
+  color: #000;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: "Open Sans";
+
+}
+.item-list li i{
+  color: #666;
+  width: 25px;
+  margin-right:20px;
+  font-size: 20px;
+}
+ul.item-list li:nth-child(even){
+  background-color: #ededed;
 }
