@@ -9,7 +9,7 @@ a {
   background-color: #ccc;
 }
 .item {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   margin-bottom: 30px;
   background-color: #fcfcfc;
   position: relative;
@@ -22,6 +22,7 @@ a {
 }
 .item .item-details h4 {
   font-family: "Noto Sans JP";
+  margin-bottom:24px;
 }
 .item .item-details p {
   font-family: "Open Sans";
@@ -43,6 +44,49 @@ a {
 }
 .upper-bar a {
   text-decoration: none;
+}
+.stars i{
+  font-size:16px;
+  margin-right:4px;
+  color: #FFA41C;
+}
+.stars{
+  position: relative;
+  margin-bottom:8px;
+}
+.stars::before{
+  content : "Global Rating";
+  font-size:11px;
+  position: absolute;
+  bottom: 24px;
+  font-family: "Noto Sans JP";
+  color: #707070;
+
+}
+.price{
+  position: relative;
+  font-family:"Open Sans";
+  font-size:15px;
+  color: #808080;
+  font-weight: bold;
+}
+.price::after{
+  content:"$";
+  position: absolute;
+  font-size:13px;
+  top: -4px;
+  margin-left:2px;
+  color: 343434;
+  
+}
+.item_added{
+  text-align: right;
+  font-size:10px;
+  font-family:"Open Sans";
+  /* font-weight: bold; */
+}
+.item_added::before{
+  content:"Date"
 }
 /* Login Page */
 .login h3 {
@@ -204,4 +248,81 @@ ul.item-list li span{
 }
 ul.item-list li:nth-child(even){
   background-color: #ededed;
+}
+.desc span{
+  font-family: "Noto Sans JP"; 
+  font-size:15px;
+}
+.desc p{
+  font-family: "Open Sans";
+  font-size:14px;
+  color:#1c1c1c;
+}
+.comments > h3{
+  font-family: "Noto Sans JP"; 
+  text-align: center;
+  margin:40px 0px 60px 0px;
+
+}
+
+.user-name{
+  font-size: 13px;
+  font-family: "Noto Sans JP";
+  white-space: nowrap;
+}
+.user-comments .user-img{
+  border-radius: 50%;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+  margin: 0px auto;
+}
+.left-user{
+  margin-bottom:25px;
+}
+.comment-text{
+  background-color: #f0f0f0;
+  padding: 20px;
+  position: relative;
+  min-width: 210px !important;
+  max-width: 540px;
+  font-family: "Open Sans";
+  font-size: 15px;
+
+}
+.comment-text::after{
+  content:"";
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-right: 40px solid #f0f0f0;
+  border-bottom: 20px solid transparent;
+  position: absolute;
+  top: 5px;
+  left: -25px;
+}
+.comment-date{
+  position: absolute;
+  bottom: 3px;
+  right: 20px;
+  font-family: "Open Sans";
+  font-size: 11px;
+  color: #333;
+  font-weight: bold;
+}
+/* Add Comment */
+.add-comment{
+  font-family: "Open Sans";
+  margin:30px 0px;
+}
+.add-comment form{
+  max-width: 600px;
+}
+.add-comment form textarea{
+  resize:none;
+  height: 150px !important;
+}
+.add-comment form textarea:focus{
+  box-shadow: none;
+
 }
