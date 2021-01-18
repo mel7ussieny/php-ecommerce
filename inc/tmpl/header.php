@@ -15,28 +15,35 @@
 
     <body>
       <div class="container">
-        <div class="d-flex justify-content-end upper-bar">
+        <div class="d-flex justify-content-start align-items-center upper-bar">
           <?php
           // View The User Name
             if(!isset($_SESSION['Client'])){
               echo '<a href="login.php" style="margin-left:auto">Login/Sign Up</a>';
             }else{
-              echo "<div class='d-inline mr-auto'>";
-              echo '<span>Welcome '.$_SESSION['Client'].' </span>';
-              echo '<a href="profile.php">• View Profile </a>';
-              echo '<a href="newads.php">• New Ads </a>';
-              echo '<a href="logout.php">• Logout</a>';
-            
-
-              echo "</div>"; 
+            echo' 
+            <div class="user-profile">
+              <img src="model.jpg" alt="Img">
+            </div>';
+            echo '<div class="dropdown">';
+            echo  '<button class="btn dropdown-toggle btn-dropdown" style="box-shadow:none" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  '.$_SESSION['Client'].'
+                  </button>';
+            echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+            echo '<a href="profile.php"><button class="dropdown-item" type="button">View Profile</button></a>';
+            echo '<a href="newads.php"><button class="dropdown-item" type="button">New ads</button></a>';
+            echo '<a href="logout.php"><button class="dropdown-item" type="button">Logout</button></a>';
+            echo '</div>';
+            echo '</div>';
             }
 
-          // View Users Controls
-            
           ?>
 
+
         </div>
+
       </div>
+      
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
         <div class="container">
           <a class="navbar-brand" href="index.php">Shop</a>
@@ -49,7 +56,7 @@
 
               <?php
                 foreach(getCat() as $cat){
-                  echo "<li class='nav-item'><a class='nav-link' href='categories.php?pageid=".$cat["ID"]."&pagename=".str_replace(" ","-",$cat['Name'])."'>".  $cat['Name']."</a></li>";
+                  echo "<li class='nav-item'><a class='nav-link' href='categories.php?pageid=".$cat["ID"]."'>".  $cat['Name']."</a></li>";
                 }
               ?>
             </ul>

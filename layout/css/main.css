@@ -9,7 +9,6 @@ a {
   background-color: #ccc;
 }
 .item {
-  /* border: 1px solid #ccc; */
   margin-bottom: 30px;
   background-color: #fcfcfc;
   position: relative;
@@ -325,4 +324,23 @@ ul.item-list li:nth-child(even){
 .add-comment form textarea:focus{
   box-shadow: none;
 
+}
+/* Upper navbar */
+.dropdown-menu a:focus{
+  background-color: red;
+}
+.user-profile img{
+  width: 60px;
+}
+.user-profile{
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+
+}
+
+/* Hompage */
+.homepage-items{
+  margin-top:50px;
 }

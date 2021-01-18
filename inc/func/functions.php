@@ -33,12 +33,19 @@
     return $items;
   }
 
-
+// Get All Items
+  function getAllItems($tbl){
+    global $connect;
+    $stmt = $connect->prepare("SELECT * FROM $tbl");
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+    return $rows; 
+  }
   // Get Items From Categories
   
-  function getCat(){
+  function getCat($where = NULL){
     global $connect;
-    $stmt = $connect->prepare("SELECT * FROM categories ORDER BY Ordering ASC");
+    $stmt = $connect->prepare("SELECT * FROM categories $where ORDER BY Ordering ASC");
     $stmt->execute();
     $cats = $stmt->fetchAll();
     return $cats;
@@ -47,7 +54,15 @@
 
   }
 
+  //Get the count of items in table
+  function getItemsCount($tbl){
+    global $connect;
+    $stmt = $connect->prepare("SELECT * FROM $tbl");
+    $stmt->execute();
+    $count = $stmt->rowCount();
 
+    return $count;
+  }
 
 
 // Old Functions May Used

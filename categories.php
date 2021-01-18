@@ -3,10 +3,18 @@
     include "init.php";
 ?>
     <div class="container">
-        <h3 class='text-center display-3 mt-4 mb-3'><?php echo str_replace("-"," ",$_GET['pagename']) ?></h3>
-        <div class="row">
+        
         <?php
-            foreach(getItems("Cat_ID",$_GET['pageid']) as $item){   
+        $pageid = isset($_GET['pageid']) && is_numeric($_GET['pageid']) ? $_GET['pageid'] : 0;
+        $count = checkItem("ID","categories",$pageid);
+
+        if($count > 0){
+            // Get the name of the categorie
+            $name = getCat("WHERE ID = ".$_GET['pageid']);
+            echo "<h3 class='text-center display-3 mt-4 mb-3'>".$name[0]['Name']."</h3>";
+            echo "<div class='row'>";
+            foreach(getItems("Cat_ID",$_GET['pageid']) as $item){ 
+
                 echo "<div class='col-12 col-md-6 col-lg-3'>";
                     echo "<div class='item'>";
                         echo "<div class='item-img d-flex justify-content-center'><img src='img.jpg' class='item-img img-responsive m-auto'></div>";
@@ -23,6 +31,10 @@
                         echo "</div>";
                 echo "</div>";
             }
+        }else{
+            echo "<div class='alert alert-danger col-12 text-center mt-3'>We didn't find your request</div>";
+        }
+            
         ?>
         </div>
     </div>

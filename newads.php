@@ -71,8 +71,6 @@
               }
         }
         ?>
-        <i class="fas fa-star"></i>
-
 
         <div class="adver">
             <div class="container">

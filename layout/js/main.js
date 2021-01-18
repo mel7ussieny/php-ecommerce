@@ -20,7 +20,7 @@ $(document).ready(function(){
           
         }
         $(".login form").hide();
-        $(".form-login."+$(this).attr("class")).fadeIn(100);
+        $(".form-login."+$(this).attr("class")).show(100);
     })
       $(".preview").on("keyup keydown",function(){
         $("."+$(this).attr("data-live")).text($(this).val());

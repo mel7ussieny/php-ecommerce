@@ -9,6 +9,39 @@
         $name = $row['FullName'];
         $fname = substr($name,0,strpos($name," "));
         $lname = substr($name,strpos($name, " ")); 
+
+
+        // Edit the information
+
+        if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_SESSION['Client'])){
+            $userid = $_SESSION['User_ID'];
+            $full   = filter_var($_POST['full'],FILTER_SANITIZE_STRING);
+            $user   = filter_var($_POST['user'],FILTER_SANITIZE_STRING);
+            $email  = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
+
+            $errors = [];
+            if(strlen($full) < 5){
+                $erros[] = "Your name must be grater than 5 characters";
+            }
+            if(strlen($user) < 5){
+                $erros[] = "Your username must be grater than 5 characters";
+            }
+            if(strlen($email) < 5){
+                $erros[] = "Please enter valid email address";
+            }
+
+            if(empty($erros)){
+                $stmt = $connect->prepare("UPDATE users SET FullName = ?, Email = ?, Username = ? WHERE UserID = ?");
+                $stmt->execute(array($full,$email,$user,$userid));
+                if($stmt){
+                    $msg = "<div class='alert alert-success'>".$stmt->rowCount()." Record Updated</div>";
+                }else{
+                    $msg = "<div class='alert alert-danger'>Somthing went wrong</div>";
+                }
+
+            }
+            
+        }
 ?>
     <div class="infos">
         <div class="container">
@@ -25,23 +58,29 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="user-infos">
-                        <form>
+                        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+                            <?php
+                                if(isset($msg)){
+                                    echo $msg;
+                                }
+                            ?>
                             <div class="user-personal">
+                                <input type="hidden" name="userid" value="<?php echo $row["UserID"]?>">
                                 <span class="title-column">Personal Information :</span>
                                 <div class="input-field">
                                     <label for="name">Full Name</label>
-                                    <input type="text" value="<?php echo $row['FullName']?>" class="form-control" id="name">
+                                    <input name="full" type="text" value="<?php echo $row['FullName']?>" class="form-control" id="name">
                                 </div>
                                 <div class="input-field">
                                     <label for="user">Username</label>
-                                    <input type="text" value="<?php echo $row['Username']?>" id="user" class="form-control">
+                                    <input name="user" type="text" value="<?php echo $row['Username']?>" id="user" class="form-control">
                                 </div>
                             </div>
                             <div class="user-contact">
                                 <span class="title-column">Contact Information : </span>
                                 <div class="input-field">
                                     <label for="email">Email</label>
-                                    <input type="email" value="<?php echo $row['Email']?>" id="email" class="form-control">
+                                    <input name="email" type="email" value="<?php echo $row['Email']?>" id="email" class="form-control">
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary mt-2">
