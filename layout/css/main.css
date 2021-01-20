@@ -10,7 +10,7 @@ a {
 }
 .item {
   margin-bottom: 30px;
-  background-color: #fcfcfc;
+  /* background-color: #fcfcfc; */
   position: relative;
 }
 .item-img{
