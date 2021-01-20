@@ -4,7 +4,7 @@
     include 'init.php';
         if($_SERVER['REQUEST_METHOD'] == "GET"){
             $itemid = isset($_GET['item_id']) && is_numeric($_GET['item_id']) ? $_GET['item_id'] : 0;
-            $stmt = $connect->prepare("SELECT items.*,categories.Name,users.Username,categories.ID FROM items 
+            $stmt = $connect->prepare("SELECT items.*,categories.Name,users.Username,categories.ID,users.user_avatar FROM items 
             INNER JOIN categories ON items.Cat_ID = categories.ID
             INNER JOIN users ON items.User_ID = users.UserID
             WHERE items.Item_ID = ?
@@ -13,13 +13,15 @@
             $count  = $stmt->rowCount();
             $row    = $stmt->fetch();
             if($count > 0){
+            $img = empty($row['Item_Avatar']) ? "default-item.jpg" : $row['Item_Avatar'];
+
 ?>
     <div class="item-display">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="item-pic">
-                        <img src="image-default-news.jpg" alt="Image" class="img-fluid">
+                        <img src="admin/upload/imgs/<?php echo $img?>" alt="Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
@@ -45,23 +47,26 @@
                         <hr>
                         <h3>Customer questions & answers</h3>
                     <?php
-                        $stmt = $connect->prepare("SELECT comments.*,Username,FullName FROM comments
+                        $stmt = $connect->prepare("SELECT comments.*,users.Username,users.FullName,users.user_avatar FROM comments
                         INNER JOIN users ON comments.Com_User = users.UserID 
                         WHERE comments.Com_Item = $itemid && Com_Status = 1
                         ");
                         $stmt->execute();
                         $rows = $stmt->fetchAll();
+
                     ?>
 <!-- Show The Comments -->
                     <?php
                         foreach($rows as $row){
+                        $userimg = empty($row['user_avatar']) ? "default-user.jpg" : $row['user_avatar'];
+
                     ?>
                     <div class="user-comments">
                         <div class="row">
                             <div class="col-4 col-md-2 d-flex justify-content-center">
                                 <div class="left-user">
                                     <div class="user-img">
-                                        <img src="mode-comment.jpg" alt="Image" class="img-fluid">
+                                        <img src="admin/upload/imgs/<?php echo $userimg?>" alt="Image" class="img-fluid">
                                     </div>
                                     <div style="text-align:center"><span class="user-name"><?php echo $row['Username']?></span></div>
                                 </div>

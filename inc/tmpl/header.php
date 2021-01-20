@@ -21,9 +21,14 @@
             if(!isset($_SESSION['Client'])){
               echo '<a href="login.php" style="margin-left:auto">Login/Sign Up</a>';
             }else{
-            echo' 
+              // Get The Img 
+              $stmt = $connect->prepare("SELECT user_avatar FROM users WHERE UserID = ?");
+              $stmt->execute(array($_SESSION['User_ID']));
+              $row = $stmt->fetch();
+              $img = empty($row['user_avatar']) ? "default-user.jpg" : $row['user_avatar'];
+               echo' 
             <div class="user-profile">
-              <img src="model.jpg" alt="Img">
+              <img src="admin/upload/imgs/'.$img.'" alt="Img">
             </div>';
             echo '<div class="dropdown">';
             echo  '<button class="btn dropdown-toggle btn-dropdown" style="box-shadow:none" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

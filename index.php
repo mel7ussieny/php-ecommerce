@@ -11,10 +11,11 @@ session_start();
                 // Get the name of the categorie
                 echo "<div class='row'>";
                 foreach(getAllItems("items") as $item){ 
+                    $img = empty($item['Item_Avatar']) ? "default-item.jpg" : $item['Item_Avatar'];
 
                     echo "<div class='col-12 col-md-6 col-lg-3'>";
                         echo "<div class='item'>";
-                            echo "<div class='item-img d-flex justify-content-center'><img src='img.jpg' class='item-img img-responsive m-auto'></div>";
+                            echo "<div class='item-img d-flex justify-content-center'><img src='admin/upload/imgs/".$img."' class='item-img img-responsive m-auto'></div>";
                             echo "<div class='item-details'>";
                                 echo "<h4><a href='items.php?item_id=".$item['Item_ID']."'>".$item['Item_Name']."</a></h4>";
                                 echo "<div class='stars'>";

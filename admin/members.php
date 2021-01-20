@@ -162,7 +162,7 @@ foreach($row as $key => $value){
         // Insert Action
 ?>
 <div class="container">
-      <form action="?action=Insert" method="POST">
+      <form action="?action=Insert" method="POST" enctype="multipart/form-data">
           <div class="form-card form-group col-sm-12 col-md-6">
               <span class="display-4 text-dark">Add Member</span>
               <hr style="text-dark">
@@ -170,7 +170,8 @@ foreach($row as $key => $value){
               <input type="password" name="newpass" class="form-control" placeholder="Password" autocomplete="new-password">
               <input type="email" name="email" class="form-control" placeholder="Email" autocomplete="off" required>
               <input type="text" name="full" class="form-control" placeholder="Full Name" autocomplete="off" required>
-              <input type="Submit" value="Add Member" class="btn-success form-control" required>
+              <input type="file" name="file" class="form-control" autocomplete="off" required>
+              <input type="Submit" value="Add Member" class="btn-success form-control">
         </div>
       </form>
   </div>
@@ -181,6 +182,19 @@ foreach($row as $key => $value){
           $email  = $_POST['email'];
           $full   = $_POST['full'];
           $pass   = $_POST['newpass'];
+          // $file   = $_FILES['file'];
+
+          // Pic Infos
+          $file_name = $_FILES['file']['name'];
+          $file_type = $_FILES['file']['type'];
+          $file_tmp  = $_FILES['file']['tmp_name'];
+          $file_size = $_FILES['file']['size'];
+
+
+          // Picture Security 
+
+
+
           $hashedpass = sha1($pass);
           $ErrorsCatch = [];
 
@@ -201,22 +215,34 @@ foreach($row as $key => $value){
             if(strlen($full) < 7){
               $ErrorsCatch[] = "Your name must be grater than 7 characters";
             }            
+            if(!empty($file_name) && !in_array($ext,$allowed_ext)){
+              $ErrorsCatch[] = "This file is not allowed";
+            }
+            if(empty($file_name)){
+              $ErrorsCatch[] = "Avatart is required";
+            }
+            if($file_size > 4194304){
+              $ErrorsCatch[] = "This file must be less than 4MB";
+            }
           }
           
           
 
           if(empty($ErrorsCatch)){
+            $avatar_name = rand(0,9999999) . "_" . $file_name;
+
             $stmt = $connect->prepare("INSERT INTO 
-            users(Username, Password, Email, FullName,RegStatus,date) 
-            VALUES(:zuser, :zpass, :zmail, :zfull,1,:zdate)
-            ");
+            users(Username, Password, Email, FullName,RegStatus,date,user_avatar) 
+            VALUES(:zuser, :zpass, :zmail, :zfull,1,:zdate, :zavatar) ");
             $stmt->execute(array(
             "zuser" => $user,
             "zpass" => $hashedpass,
             "zmail" => $email,
             "zfull" => $full,
-            "zdate" => date("Y-m-d")
+            "zdate" => date("Y-m-d"),
+            "zavatar" => $avatar_name
             ));
+            move_uploaded_file($file_tmp,"upload\imgs\\".$avatar_name);
 
             $msg = "<div class='alert alert-success col-sm-5 mr-auto ml-auto mt-2'>" .  $stmt->rowCount() . " Record Updated</div>";
             redirectPage($msg,3,"back");

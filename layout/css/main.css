@@ -13,8 +13,12 @@ a {
   background-color: #fcfcfc;
   position: relative;
 }
+.item-img{
+  min-height: 200px;
+}
 .item .item-img img {
   width: 100%;
+  min-height: auto;
 }
 .item .item-details {
   padding: 10px;

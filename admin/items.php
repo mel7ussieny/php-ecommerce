@@ -100,7 +100,7 @@ $navbar = 1;
 ?>
 <div class="container">
     <div class="items">
-      <form action="?action=Update" method="POST">
+      <form action="?action=Update" method="POST" enctype="multipart/form-data">
           <div class="form-card form-group col-12 col-md-8 col-lg-6">
             <span class="display-4 text-dark">Edit Items</span>
             <hr style="text-dark">
@@ -109,6 +109,7 @@ $navbar = 1;
             <textarea class="form-control" placeholder="Description" name="desc"><?php echo $row['Item_Description']?></textarea>
             <input type="number" name="price" value="<?php echo $row['Item_Price'];?>" class="form-control" placeholder="Price" autocomplete="off" required>
             <input type="text" name="country" value="<?php echo $row['Item_Country'];?>" class="form-control" placeholder="Country" autocomplete="off" required>
+            <input type="file" name="file" class="form-control" autocomplete="off">
             <select name="item_status" class="item_status">
 
                 <option value="4" <?php if($row['Item_Status'] == 4){echo "selected";}?>>New</option>
@@ -174,6 +175,8 @@ $navbar = 1;
             }
         }elseif($action == "Update"){
             // UPDATE ITEM
+
+
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $item_ID    = $_POST['Item_ID'];
                 $name       = $_POST['name'];
@@ -184,6 +187,20 @@ $navbar = 1;
                 $rating     = $_POST['rating'];
                 $member     = $_POST['members'];
                 $cat        = $_POST['categories'];
+                
+                // Item picture details
+                $file_name = $_FILES['file']['name'];
+                $file_type = $_FILES['file']['type'];
+                $file_tmp  = $_FILES['file']['tmp_name'];
+                $file_size = $_FILES['file']['size'];
+                
+
+                // Precutaions
+                $allowed_ext = array("jpeg","jpg","png","gif");
+                $file_ext = explode(".",$file_name);
+                $ext = strtolower($file_ext[count($file_ext) -1]);
+                
+                
                 $ErrorsCatch = [];
 
                 if(strlen($name) < 4){
@@ -199,18 +216,65 @@ $navbar = 1;
                     $ErrorsCatch[] = "The price can't be empty";
 
                 }
+                if(!empty($file_name) && !in_array($ext,$allowed_ext)){
+                    $ErrorsCatch[] = "This file is not allowed";
+                  }
+                  if($file_size > 4194304){
+                    $ErrorsCatch[] = "This file must be less than 4MB";
+                  }
 
-                if(empty($ErrorsCatch)){
-                    $stmt = $connect->prepare("UPDATE items SET Item_Name = ?, Item_Description = ?, Item_Price = ?, Item_Country = ?, Item_Status = ?, Item_Rating = ?, User_ID = ?, Cat_ID = ? WHERE Item_ID = ?");
-                    $stmt->execute(array($name,$desc,$price,$country,$status,$rating,$member,$cat,$item_ID));
-                    $msg = "<div class='alert alert-success col-sm-5 mr-auto ml-auto mt-2'>" .  $stmt->rowCount() . " Record Updated</div>";
-                    redirectPage($msg,3,"back");
-                }else{
-                    foreach($ErrorsCatch as $error){
-                        echo "<div class='alert alert-danger col-sm-5 mr-auto ml-auto mt-2'>".$error."</div>";
-                      }
-                      redirectMsg(3,"back");   
-                }
+                  // Check User to change Profile
+                  $count = checkItem("Item_ID","items",$item_ID);
+                  
+                  if($count > 0){
+                    // The Item Exists
+
+                    // Get the name of the avatar
+                    $stmt = $connect->prepare("SELECT Item_Avatar FROM items WHERE Item_ID = ?");
+                    $stmt->execute(array($item_ID));
+                    $row = $stmt->fetch();
+
+
+                    if(empty($ErrorsCatch)){
+
+                        // Edit Image
+                        if(!empty($file_name)){
+                            // User uploaded image
+                            $avatar_name = rand(0,9999999) . "_" . $file_name;
+                            if(!empty($row["Item_Avatar"])){
+                                // User have one in database
+                                if(is_file("upload/imgs/".$row['Item_Avatar'])){
+                                    unlink("upload/imgs/".$row["Item_Avatar"]);
+                                }
+                            }
+                            
+                            move_uploaded_file($file_tmp,"upload\imgs\\".$avatar_name);
+                        }else{
+                            // User didn't upload image
+                            if(!empty($row['Item_Avatar'])){
+                                $avatar_name = $row['Item_Avatar'];
+                            }else{
+                                $avatar_name = "";
+                            }
+                        }
+                        // Edit Image
+
+
+                        $stmt = $connect->prepare("UPDATE items SET Item_Name = ?, Item_Description = ?, Item_Price = ?, Item_Country = ?, Item_Status = ?, Item_Rating = ?, User_ID = ?, Cat_ID = ?, Item_Avatar = ? WHERE Item_ID = ?");
+                        $stmt->execute(array($name,$desc,$price,$country,$status,$rating,$member,$cat,$avatar_name,$item_ID));
+                        $msg = "<div class='alert alert-success col-sm-5 mr-auto ml-auto mt-2'>" .  $stmt->rowCount() . " Record Updated</div>";
+                        redirectPage($msg,3,"back");
+                    }else{
+                        foreach($ErrorsCatch as $error){
+                            echo "<div class='alert alert-danger col-sm-5 mr-auto ml-auto mt-2'>".$error."</div>";
+                          }
+                          redirectMsg(3,"back");
+                    }
+
+                  }
+
+
+
             }else{
                 // UPDATE NOT WITH POST REQUEST
                 $msg = "<div class='alert alert-danger col-sm-5 mr-auto ml-auto mt-3'>You don't have permission to access this page</div>";
@@ -220,7 +284,7 @@ $navbar = 1;
 ?>
 <div class="container">
     <div class="items">
-      <form action="?action=Insert" method="POST">
+      <form action="?action=Insert" method="POST" enctype="multipart/form-data">
           <div class="form-card form-group col-12 col-md-8 col-lg-6">
             <span class="display-4 text-dark">Add Items</span>
             <hr style="text-dark">
@@ -228,6 +292,7 @@ $navbar = 1;
             <textarea class="form-control" placeholder="Description" name="desc"></textarea>
             <input type="number" name="price" class="form-control" placeholder="Price" autocomplete="off" required>
             <input type="text" name="country" class="form-control" placeholder="Country" autocomplete="off" required>
+            <input type="file" name="file" class="form-control" autocomplete="off" required>
             <select name="item_status" class="item_status">
                 <option value="null">Status</option>
                 <option value="4" selected>New</option>
@@ -292,8 +357,18 @@ $navbar = 1;
                 $rating     = $_POST['rating'];
                 $member     = $_POST['members'];
                 $cat        = $_POST['categories'];
+                $file_name = $_FILES['file']['name'];
+                $file_type = $_FILES['file']['type'];
+                $file_tmp  = $_FILES['file']['tmp_name'];
+                $file_size = $_FILES['file']['size'];
+
                 $ErrorsCatch = [];
-      
+    
+
+                $allowed_ext = array("jpeg","jpg","png","gif");
+                $file_ext = explode(".",$file_name);
+                $ext = strtolower($file_ext[count($file_ext) -1]);
+                
                 // Validation Cathces 
                 
                 // CHECK USER EXISTS
@@ -321,15 +396,25 @@ $navbar = 1;
                     $ErrorsCatch[] = "The price can't be empty";
 
                 }
+                if(!empty($file_name) && !in_array($ext,$allowed_ext)){
+                    $ErrorsCatch[] = "This file is not allowed";
+                  }
+                  if(empty($file_name)){
+                    $ErrorsCatch[] = "Avatart is required";
+                  }
+                  if($file_size > 4194304){
+                    $ErrorsCatch[] = "This file must be less than 4MB";
+                  }
                 
                 
                 
       
                 if(empty($ErrorsCatch)){
                   $stmt = $connect->prepare("INSERT INTO 
-                  items(Item_Name, Item_Description, Item_Price, Item_Country, Item_Status, Item_Rating, User_ID, Cat_ID, Item_Date) 
-                  VALUES(:it_name, :it_desc, :it_price, :it_conutry, :it_status, :it_rating, :it_user, :it_cat, :it_date  )
+                  items(Item_Name, Item_Description, Item_Price, Item_Country, Item_Status, Item_Rating, User_ID, Cat_ID, Item_Date, Item_Avatar) 
+                  VALUES(:it_name, :it_desc, :it_price, :it_conutry, :it_status, :it_rating, :it_user, :it_cat, :it_date, :zavatar)
                   ");
+                  $avatar_name = rand(0,9999999) . "_" . $file_name;
                   $stmt->execute(array(
                   "it_name" => $name,
                   "it_desc" => $desc,
@@ -339,8 +424,11 @@ $navbar = 1;
                   "it_rating" => $rating,
                   "it_user" => $member,
                   "it_cat" => $cat,
-                  "it_date" => date("Y-m-d")
+                  "it_date" => date("Y-m-d"),
+                  "zavatar" => $avatar_name
                   ));
+                  
+                  move_uploaded_file($file_tmp,"upload\imgs\\".$avatar_name);
       
                   $msg = "<div class='alert alert-success col-sm-5 mr-auto ml-auto mt-2'>" .  $stmt->rowCount() . " Record Updated</div>";
                   redirectPage($msg,3,"back");
