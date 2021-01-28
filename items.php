@@ -32,7 +32,7 @@
                             <li><i class="fas fa-tags"></i><span class="item-detail"> Price :  <?php echo $row["Item_Price"]?>$</span></li>
                             <li><i class="fas fa-map-marker-alt"></i><span class="item-detail">Made in : <?php echo $row["Item_Country"]?></span></li>
                             <li><i class="fas fa-shopping-bag"></i><span class="item-detail"> Categorie : <a href="categories.php?pageid=<?php echo $row['ID']?>"><?php echo $row["Name"]?></a></span> </li>
-                            <li><i class="fas fa-user-cog"></i><span class="item-detail"> Added By : <?php echo $row["Username"]?></span></li>
+                            <li><i class="fas fa-user-cog"></i><span class="item-detail"> Added By : <a href="profile.php?view=<?php echo $row['Username']?>"><?php echo $row["Username"]?></a></span></li>
                         </ul>
                     </div>
                 </div>

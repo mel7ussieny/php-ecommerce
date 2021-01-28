@@ -1,7 +1,7 @@
 <?php
     session_start();
     include 'init.php';
-    if(isset($_SESSION['Client']) && !isset($_GET['view'])){
+    if(isset($_SESSION['Client']) && !isset($_GET['view']) || isset($_SESSION['Client']) && isset($_GET['view']) && $_GET['view'] == $_SESSION['Client']){
         $title = "Profile";
         $stmt = $connect->prepare("SELECT * FROM users WHERE UserId = ?");
         $stmt->execute(array($_SESSION['User_ID']));
@@ -200,19 +200,102 @@
     </div>
 <?php
     }elseif(isset($_GET['view'])){
+        // View Profile page for users
+
         $client_user = str_replace("","",filter_var($_GET['view'], FILTER_SANITIZE_STRING));
         $count = checkItem("Username","users",$client_user);
 
         if($count > 0){
             // Get Information of user
-            $stmt_info = $connect->prepare("SELECT Username,user_avatar,UserID,Email,FullName FROM users WHERE Username = $client_user LIMIT 1");
-            // Statment To Get All The Information For User
+            $stmt_info = $connect->prepare("SELECT Username,user_avatar,UserID,Email,FullName FROM users WHERE Username = ? LIMIT 1");
+            $stmt_info->execute(array($client_user));
+            $row_info = $stmt_info->fetch();
+            $id_info = $row_info['UserID'];
+
+            $img = (empty($row_info['user_avatar'])) ? "default-user.jpg" : $row_info['user_avatar'];
+            
+?>
+    <div class="view-infos">
+        <div class="container">
+            <div class="row">
+                    <div class="col-12 col-lg-4 view-infos-img">
+                        <div class="user-img">
+                            <img src="admin/upload/imgs/<?php echo $img?>" class="img-fluid" alt="Model">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 d-flex justify-content-center align-items-center">
+                        <div class="client-infos">
+                            <h3 class="display-4 text-center"><?php echo $row_info['FullName']?></h3>
+                            <span class="date-client">Registered date : 20/20/2020</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+<?php
+            // Get the Items
+            $count = checkItem("User_ID","items",$id_info);
+            
+            if($count > 0){
+                $stmt_items = $connect->prepare("SELECT items.*,categories.Name FROM items 
+                                                INNER JOIN categories 
+                                                ON 
+                                                items.Cat_ID = categories.ID WHERE User_ID = ?");
+                $stmt_items->execute(array($id_info));
+                $row_items = $stmt_items->fetchAll();
+                
+?>
+    <div class="container">
+        <hr>
+            <div class="row">
+                <div class="col-12">
+                <div class="view-items">
+                    <h3 class="heading">Items<?php echo $row_info['Username']?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+<?php
+    foreach($row_items as $item){
+?> 
+    <div class="col-12">
+        <?php echo $item['Item_Name']?>
+    </div>
+
+<?php    
+    }
+?>
+        </div>
+    </div>
+<?php
+                // The user upload items
+            }else{
+                // The user doesn't have items to show
+
+            }
+
+            $count = checkItem("Com_User","comments",$id_info);
+
+            if($count > 0){
+                $stmt_com = $connect->prepare("SELECT comments.*,items.* FROM comments 
+                                            INNER JOIN items 
+                                            ON 
+                                            comments.Com_Item = items.Item_ID WHERE Com_User = ?");
+                $stmt_com->execute(array($id_info));
+                $row_comments = $stmt_com->fetchAll();
+                // The user have comments in db
+            }else{
+                // The user doesn't have comments
+            }
+            
+            
         
         }else{
-            echo "Use Doesn't Exists";
+            $msg = "<div class='alert alert-danger col-sm-5 mr-auto ml-auto mt-2'>The User doesn't exists</div>";
+            // redirectPage($msg,3,"index.php");
+            echo $msg;
         }
-        // header("Location:login.php");
-        // exit();
+
     }
     include $tmpl . 'footer.php';
 ?>

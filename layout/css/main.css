@@ -200,6 +200,28 @@ a {
   color: #777;
   margin-top: 5px;
 }
+
+
+/* view profile */
+.view-infos{
+  margin:50px 0px;
+}
+
+.date-client{
+  font-size:11px;
+}
+.view-infos .user-img{
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin: 20px auto;
+  position: relative;
+}
+.view-items .heading{
+  font-family: "Open Sans";
+
+}
 /* Advert */
 .user-ads {
   margin-top: 100px;
