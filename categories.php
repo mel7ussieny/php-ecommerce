@@ -15,7 +15,7 @@
             echo "<div class='row'>";
             foreach(getItems("Cat_ID",$_GET['pageid']) as $item){ 
 
-                echo "<div class='col-12 col-md-6 col-lg-3'>";
+                echo "<div class='col-4 col-lg-2'>";
                     echo "<div class='item'>";
                     $img = empty($item['Item_Avatar']) ? "default-item.jpg" : $item['Item_Avatar'];
                         echo "<div class='item-img d-flex justify-content-center'><img src='admin/upload/imgs/".$img."' class='item-img img-responsive m-auto'></div>";

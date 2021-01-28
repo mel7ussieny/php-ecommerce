@@ -25,4 +25,15 @@ $(document).ready(function(){
       $(".preview").on("keyup keydown",function(){
         $("."+$(this).attr("data-live")).text($(this).val());
       })
+
+
+      // Hover on profile picture
+      $('.user-img').hover(function(){
+        $(this).children(".file").css("display","flex");
+      })
+      $('.user-img').on("mouseleave",function(){
+        $(this).children(".file").css("display","none");
+      })
+
+      
 })

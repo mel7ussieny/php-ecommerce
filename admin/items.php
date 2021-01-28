@@ -218,10 +218,10 @@ $navbar = 1;
                 }
                 if(!empty($file_name) && !in_array($ext,$allowed_ext)){
                     $ErrorsCatch[] = "This file is not allowed";
-                  }
-                  if($file_size > 4194304){
+                }
+                if($file_size > 4194304){
                     $ErrorsCatch[] = "This file must be less than 4MB";
-                  }
+                }
 
                   // Check User to change Profile
                   $count = checkItem("Item_ID","items",$item_ID);

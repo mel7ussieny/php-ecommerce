@@ -13,7 +13,7 @@ a {
   /* background-color: #fcfcfc; */
   position: relative;
 }
-.item-img{
+.item-img {
   min-height: 200px;
 }
 .item .item-img img {
@@ -21,11 +21,13 @@ a {
   min-height: auto;
 }
 .item .item-details {
-  padding: 10px;
+  padding: 8px;
 }
 .item .item-details h4 {
   font-family: "Noto Sans JP";
-  margin-bottom:24px;
+  margin-bottom: 24px;
+  font-size: 19px;
+  overflow-wrap: break-word;
 }
 .item .item-details p {
   font-family: "Open Sans";
@@ -48,48 +50,46 @@ a {
 .upper-bar a {
   text-decoration: none;
 }
-.stars i{
-  font-size:16px;
-  margin-right:4px;
-  color: #FFA41C;
+.stars i {
+  font-size: 16px;
+  margin-right: 4px;
+  color: #ffa41c;
 }
-.stars{
+.stars {
   position: relative;
-  margin-bottom:8px;
+  margin-bottom: 8px;
 }
-.stars::before{
-  content : "Global Rating";
-  font-size:11px;
+.stars::before {
+  content: "Global Rating";
+  font-size: 11px;
   position: absolute;
   bottom: 24px;
   font-family: "Noto Sans JP";
   color: #707070;
-
 }
-.price{
+.price {
   position: relative;
-  font-family:"Open Sans";
-  font-size:15px;
+  font-family: "Open Sans";
+  font-size: 15px;
   color: #808080;
   font-weight: bold;
 }
-.price::after{
-  content:"$";
+.price::after {
+  content: "$";
   position: absolute;
-  font-size:13px;
+  font-size: 13px;
   top: -4px;
-  margin-left:2px;
+  margin-left: 2px;
   color: 343434;
-  
 }
-.item_added{
+.item_added {
   text-align: right;
-  font-size:10px;
-  font-family:"Open Sans";
+  font-size: 10px;
+  font-family: "Open Sans";
   /* font-weight: bold; */
 }
-.item_added::before{
-  content:"Date"
+.item_added::before {
+  content: "Date";
 }
 /* Login Page */
 .login h3 {
@@ -101,8 +101,8 @@ a {
   max-width: 400px;
   margin: 0px auto;
 }
-.login h3 span.signin{
-  color: #0069D9;
+.login h3 span.signin {
+  color: #0069d9;
 }
 .form-login > input {
   margin-bottom: 10px;
@@ -115,63 +115,75 @@ a {
   display: none;
 }
 
-
 /* Profile Page */
 /* Left Column */
-.infos{
-  margin-top:30px;
+.infos {
+  margin-top: 30px;
 }
-.user-left span{
+.user-left span {
   display: block;
 }
-.user-left a{
+.user-left a {
   text-decoration: none;
 }
-.user-left{
+.user-left {
   text-align: center;
 }
-.user-img-upper{
+.user-img-upper {
   font-family: "Open Sans";
 }
-.infos .user-img{
+.infos .user-img {
   overflow: hidden;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  margin:20px auto;
+  margin: 20px auto;
+  position: relative;
+}
+.user-img .file {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.input-upload {
+  width: 240px;
 }
 /* Right Column */
-.user-infos{
-  margin-top:60px;
+.user-infos {
+  margin-top: 60px;
 }
-.user-infos > span.title-column{ 
+.user-infos > span.title-column {
   font-family: "Open Sans";
-  font-size:20px;
+  font-size: 20px;
 }
-.user-personal{
-  margin-bottom:30px;
+.user-personal {
+  margin-bottom: 30px;
 }
 .user-personal > span,
-.user-contact > span{
+.user-contact > span {
   font-family: "Noto Sans JP";
   color: #5e5e5e;
-  font-size:15px
+  font-size: 15px;
 }
-.input-field{
+.input-field {
   position: relative;
   display: flex;
   align-items: center;
   max-width: 400px;
-  margin-top:10px;
+  margin-top: 10px;
 }
-.input-field input{
+.input-field input {
   padding-right: 70px;
-  height:42px;
+  height: 42px;
 }
-.input-field input:focus{
+.input-field input:focus {
   box-shadow: none;
 }
-.input-field label{
+.input-field label {
   position: absolute;
   font-size: 13px;
   right: 10px;
@@ -181,109 +193,108 @@ a {
   -o-user-select: none;
   -webkit-user-select: none;
 }
-.static-data{
-  display:block;
+.static-data {
+  display: block;
   font-family: "Noto Sans JP";
-  font-size:12px;
+  font-size: 12px;
   color: #777;
-  margin-top: 5px;;
+  margin-top: 5px;
 }
 /* Advert */
-.user-ads{
-  margin-top:100px;
+.user-ads {
+  margin-top: 100px;
 }
-.user-ads h3{
-  margin-bottom:30px;
+.user-ads h3 {
+  margin-bottom: 30px;
   text-align: center;
   font-family: "Noto Sans JP";
-
 }
 /* New ads page */
-.adver form input,.selectboxit,textarea{
-  margin-bottom:10px !important;
+.adver form input,
+.selectboxit,
+textarea {
+  margin-bottom: 10px !important;
   height: 45px !important;
 }
 .adver form input:focus,
-.adver form textarea:focus{
+.adver form textarea:focus {
   box-shadow: none;
 }
-.adver form textarea{
-  height:100px !important;
+.adver form textarea {
+  height: 100px !important;
 }
-.adver form textarea{
+.adver form textarea {
   resize: none;
 }
-.live-preview{
-  margin-top:150px;
+.live-preview {
+  margin-top: 150px;
 }
-.item-add{
-  margin-top:50px;
+.item-add {
+  margin-top: 50px;
 }
 /* Item Display Page */
-.item-display{
+.item-display {
   margin-top: 40px;
 }
-.item_name{
+.item_name {
   font-family: "Open Sans";
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
-.item-list{
-  list-style:none;
+.item-list {
+  list-style: none;
   padding: 0px;
 }
-.item-list li{
+.item-list li {
   padding: 8px 10px;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-ul.item-list li span{
+ul.item-list li span {
   color: #000;
   font-weight: bold;
   font-size: 13px;
   font-family: "Open Sans";
-
 }
-.item-list li i{
+.item-list li i {
   color: #666;
   width: 25px;
-  margin-right:20px;
+  margin-right: 20px;
   font-size: 20px;
 }
-ul.item-list li:nth-child(even){
+ul.item-list li:nth-child(even) {
   background-color: #ededed;
 }
-.desc span{
-  font-family: "Noto Sans JP"; 
-  font-size:15px;
+.desc span {
+  font-family: "Noto Sans JP";
+  font-size: 15px;
 }
-.desc p{
+.desc p {
   font-family: "Open Sans";
-  font-size:14px;
-  color:#1c1c1c;
+  font-size: 14px;
+  color: #1c1c1c;
 }
-.comments > h3{
-  font-family: "Noto Sans JP"; 
+.comments > h3 {
+  font-family: "Noto Sans JP";
   text-align: center;
-  margin:40px 0px 60px 0px;
-
+  margin: 40px 0px 60px 0px;
 }
 
-.user-name{
+.user-name {
   font-size: 13px;
   font-family: "Noto Sans JP";
   white-space: nowrap;
 }
-.user-comments .user-img{
+.user-comments .user-img {
   border-radius: 50%;
   overflow: hidden;
   width: 70px;
   height: 70px;
   margin: 0px auto;
 }
-.left-user{
-  margin-bottom:25px;
+.left-user {
+  margin-bottom: 25px;
 }
-.comment-text{
+.comment-text {
   background-color: #f0f0f0;
   padding: 20px;
   position: relative;
@@ -291,10 +302,9 @@ ul.item-list li:nth-child(even){
   max-width: 540px;
   font-family: "Open Sans";
   font-size: 15px;
-
 }
-.comment-text::after{
-  content:"";
+.comment-text::after {
+  content: "";
   width: 0;
   height: 0;
   border-top: 20px solid transparent;
@@ -304,7 +314,7 @@ ul.item-list li:nth-child(even){
   top: 5px;
   left: -25px;
 }
-.comment-date{
+.comment-date {
   position: absolute;
   bottom: 3px;
   right: 20px;
@@ -314,37 +324,35 @@ ul.item-list li:nth-child(even){
   font-weight: bold;
 }
 /* Add Comment */
-.add-comment{
+.add-comment {
   font-family: "Open Sans";
-  margin:30px 0px;
+  margin: 30px 0px;
 }
-.add-comment form{
+.add-comment form {
   max-width: 600px;
 }
-.add-comment form textarea{
-  resize:none;
+.add-comment form textarea {
+  resize: none;
   height: 150px !important;
 }
-.add-comment form textarea:focus{
+.add-comment form textarea:focus {
   box-shadow: none;
-
 }
 /* Upper navbar */
-.dropdown-menu a:focus{
+.dropdown-menu a:focus {
   background-color: red;
 }
-.user-profile img{
+.user-profile img {
   width: 60px;
 }
-.user-profile{
+.user-profile {
   width: 60px;
   height: 60px;
   overflow: hidden;
   border-radius: 50%;
-
 }
 
 /* Hompage */
-.homepage-items{
-  margin-top:50px;
+.homepage-items {
+  margin-top: 50px;
 }
