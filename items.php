@@ -53,7 +53,7 @@
                         ");
                         $stmt->execute();
                         $rows = $stmt->fetchAll();
-
+      
                     ?>
 <!-- Show The Comments -->
                     <?php
@@ -68,7 +68,7 @@
                                     <div class="user-img">
                                         <img src="admin/upload/imgs/<?php echo $userimg?>" alt="Image" class="img-fluid">
                                     </div>
-                                    <div style="text-align:center"><span class="user-name"><?php echo $row['Username']?></span></div>
+                                    <div style="text-align:center"><span class="user-name"><a href="profile.php?view=<?php echo $row['Username']?>"><?php echo $row['Username']?></a></span></div>
                                 </div>
                             </div>
                             <div class="col-8  offset-md-1 col-md-9 offset-lg-0 col-lg-10 d-flex align-items-center right-user">
@@ -85,8 +85,7 @@
                     ?>
 <!-- Show The Comments -->
 
-                     
-                    
+                                        
 
                     </div>
                 </div>

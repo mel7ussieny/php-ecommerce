@@ -207,7 +207,7 @@
 
         if($count > 0){
             // Get Information of user
-            $stmt_info = $connect->prepare("SELECT Username,user_avatar,UserID,Email,FullName FROM users WHERE Username = ? LIMIT 1");
+            $stmt_info = $connect->prepare("SELECT Username,user_avatar,UserID,Email,FullName,date FROM users WHERE Username = ? LIMIT 1");
             $stmt_info->execute(array($client_user));
             $row_info = $stmt_info->fetch();
             $id_info = $row_info['UserID'];
@@ -226,7 +226,7 @@
                     <div class="col-12 col-lg-8 d-flex justify-content-center align-items-center">
                         <div class="client-infos">
                             <h3 class="display-4 text-center"><?php echo $row_info['FullName']?></h3>
-                            <span class="date-client">Registered date : 20/20/2020</span>
+                            <span class="date-client">Registered date : <?php echo $row_info['date']?></span>
                         </div>
                     </div>
             </div>
@@ -250,7 +250,7 @@
             <div class="row">
                 <div class="col-12">
                 <div class="view-items">
-                    <h3 class="heading">Items<?php echo $row_info['Username']?></h3>
+                    <h3 class="heading text-center mb-5 mt-5">Items has been added by <?php echo $row_info['Username']?></h3>
                 </div>
             </div>
         </div>
@@ -259,7 +259,29 @@
     foreach($row_items as $item){
 ?> 
     <div class="col-12">
-        <?php echo $item['Item_Name']?>
+        <div class="item-profile mb-5">
+            <div class="row">
+                <div class="col-3 col-lg-2">
+                    <div class="item-profile-pic">
+                        <img src="admin/upload/imgs/<?php echo $item['Item_Avatar'] ?>" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col-9 col-lg-10">
+                    <div class="item-profile-desc">
+                        <b><a href="items.php?item_id=<?php echo $item['Item_ID']?>"><?php echo $item['Item_Name']?></a></b>
+                        <p class="mt-1"><?php echo $item['Item_Description']?></p>
+                        <?php
+                            echo "<div class='stars mt-4'>";
+                            for($i = 1 ; $i <= $item['Item_Rating'] ; $i++){
+                                echo "<i class='fas fa-star'></i>";
+                            }
+                            echo "</div>";
+                        ?>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 <?php    
