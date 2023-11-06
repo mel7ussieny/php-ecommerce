@@ -54,7 +54,7 @@
 
                 <div class="col-12">
                     <div class="user-ads">
-                        <h3>Advertisements</h3>
+                        <h3>Advertisements TEST</h3>
                         <div class="row">
                         <?php
                             foreach(getItems("User_ID",$row['UserID']) as $item){
