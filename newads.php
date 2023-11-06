@@ -71,6 +71,9 @@
               }
         }
         ?>
+        <i class="fas fa-star"></i>
+
+
         <div class="adver">
             <div class="container">
                 <div class="row">
@@ -98,19 +101,6 @@
                                     <option value="3">3 Stars</option>
                                     <option value="2">2 Stars</option>
                                     <option value="1">1 Stars</option>
-                                </select>
-
-                                <select name="members" class="members">
-                                    <option value="null">Select Member</option>
-                                    <?php
-                                        $stmt = $connect->prepare("SELECT * FROM users");
-                                        $stmt->execute();
-                                        $members = $stmt->fetchAll();
-
-                                        foreach($members as $member){
-                                            echo "<option value='".$member['UserID']."'>".$member['Username']."</option>";
-                                        }
-                                    ?>
                                 </select>
                                 <select name="categories" class="categories">
                                     <option value="null">Select Categorie</option>

@@ -191,10 +191,7 @@ $navbar = 1;
                 }
                 if($rating == "status"){
                     $ErrorsCatch[] = "Check the status of the item";
-                }
-                if(strlen($desc) > 70){
-                    $ErrorsCatch[] = "The description my be less than 70 letter";
-                }            
+                }         
                 if(empty($country)){
                     $ErrorsCatch[] = "There's an problem with item country";
                 }
@@ -316,10 +313,7 @@ $navbar = 1;
                 }
                 if($cat == "null"){
                     $ErrorsCatch[] = "Check the categorie of the item";
-                }
-                if(strlen($desc) > 70){
-                    $ErrorsCatch[] = "The description my be less than 70 letter";
-                }            
+                }         
                 if(empty($country)){
                     $ErrorsCatch[] = "There's an problem with item country";
                 }

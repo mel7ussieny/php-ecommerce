@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $title = "Show item";
     include 'init.php';
         if($_SERVER['REQUEST_METHOD'] == "GET"){
             $itemid = isset($_GET['item_id']) && is_numeric($_GET['item_id']) ? $_GET['item_id'] : 0;
@@ -33,12 +34,121 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-12 desc">
+                    <span>• Description : </span>
+                    <p><?php echo $row['Item_Description']?></p>
+                </div>
+
+                <!-- Start Comments -->
+                <div class="col-12">
+                    <div class="comments">
+                        <hr>
+                        <h3>Customer questions & answers</h3>
+                    <?php
+                        $stmt = $connect->prepare("SELECT comments.*,Username,FullName FROM comments
+                        INNER JOIN users ON comments.Com_User = users.UserID 
+                        WHERE comments.Com_Item = $itemid && Com_Status = 1
+                        ");
+                        $stmt->execute();
+                        $rows = $stmt->fetchAll();
+                    ?>
+<!-- Show The Comments -->
+                    <?php
+                        foreach($rows as $row){
+                    ?>
+                    <div class="user-comments">
+                        <div class="row">
+                            <div class="col-4 col-md-2 d-flex justify-content-center">
+                                <div class="left-user">
+                                    <div class="user-img">
+                                        <img src="mode-comment.jpg" alt="Image" class="img-fluid">
+                                    </div>
+                                    <div style="text-align:center"><span class="user-name"><?php echo $row['Username']?></span></div>
+                                </div>
+                            </div>
+                            <div class="col-8  offset-md-1 col-md-9 offset-lg-0 col-lg-10 d-flex align-items-center right-user">
+                                <div class="comment-text">
+                                    <p><?php echo $row['Comment']?></p>
+                                    <span class="comment-date">Added : <?php echo $row['Com_Date']?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <?php
+                        }
+                    ?>
+<!-- Show The Comments -->
+
+                     
+                    
+
+                    </div>
+                </div>
+<?php
+if(isset($_SESSION['User_ID'])){
+    // View Add Comment Only For Registerd Users
+?>
+           <div class="col-12">
+                    <div class="add-comment">
+                        <h4>Please feel free to relay your comments</h4>
+                        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+                            <input type="hidden" name="item_id" value="<?php echo $itemid?>">
+                            <textarea placeholder="Comment" name="comment" class="form-control"></textarea>
+                            <input type="submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+<?php
+}
+
+?>
             </div>
         </div>
     </div>
 <?php
             }else{
                 echo "Sorry There's No Item Exists";
+            }
+        }else{
+            // Add The Comment To Database
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(isset($_SESSION['User_ID'])){
+                    $comment = filter_var($_POST['comment'],FILTER_SANITIZE_STRING);
+                    $it_id = $_POST['item_id'];
+
+                    $count = checkItem("Item_ID","items",$it_id);
+                    $errors = [];
+                    if($count == 0){
+                        $erros[] = "Sorry we missed the item";
+                    }
+                    if(strlen($comment) > 200){
+                        $erros[] = "The comment must be less than 200 character";
+                    }
+
+                    if(empty($erros)){
+                        // Add The Comment To Database
+                        $user_id = $_SESSION['User_ID'];
+                        $date = date("Y-m-d");
+                        $stmt = $connect->prepare("INSERT INTO comments(Comment, Com_Date, Com_Status, Com_User, Com_Item) 
+                        VALUES(:zcom,:zdate,0,:zuser,:zitem)");
+                        $stmt->execute(array(
+                            "zcom" => $comment,
+                            "zdate" => $date,
+                            "zuser" => $user_id,
+                            "zitem" => $it_id
+                        ));
+                        if($stmt){
+                            echo '<div class="alert alert-success col-sm-5 mr-auto ml-auto mt-2">Comment has been added</div>';
+                        }
+
+                    }else{
+                        foreach($erros as $error){
+                            echo "<div class='alert alert-danger col-sm-5 mr-auto ml-auto mt-2'>".$error."</div>";
+                        }        
+                    }
+                
+                }
             }
         }
     include $tmpl . 'footer.php';
